@@ -1,0 +1,9 @@
+defaultImage: nginx:latest
+
+redis:
+  enabled: true # Enable Redis
+
+apps:
+  - name: tiphyspy
+    service:
+      enabled: false
