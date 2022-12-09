@@ -8,11 +8,9 @@ repos:
         exclude: ^static/
       - id: trailing-whitespace
         exclude: ^static/
-      - id: double-quote-string-fixer
-        exclude: ^.*\b(migrations)\b.*$
       - id: debug-statements
 
-  - repo: https://gitlab.com/pycqa/flake8
+  - repo: https://github.com/pycqa/flake8
     rev: 3.9.2
     hooks:
       - id: flake8
