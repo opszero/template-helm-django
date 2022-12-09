@@ -7,3 +7,5 @@ apps:
   - name: tiphyspy
     service:
       enabled: false
+      command: ["python", "main.py", "&"]
+
