@@ -1,7 +1,14 @@
 defaultImage: nginx:latest
 
 redis:
-  enabled: false # Enable Redis
+  enabled: false # Enable
+  master:
+    persistence:
+      enabled: false
+  replica:
+    persistence:
+      enabled: false
+
 
 apps:
   - name: tiphyspy
