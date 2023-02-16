@@ -7,6 +7,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+flask = "^2.2.3"
+opszero-rustypy = "^0.1.0"
 
 [build-system]
 requires = ["poetry-core"]
