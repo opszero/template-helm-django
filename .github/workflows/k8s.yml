@@ -47,4 +47,6 @@ jobs:
         aws eks update-kubeconfig --name $CLUSTER_NAME
         helm repo add tiphys https://opszero.github.io/tiphys
         helm repo update
-        helm upgrade --install tiphyspy tiphys/tiphys --timeout 10m -f ./deploy.yaml
+        helm upgrade --install tiphyspy tiphys/tiphys --timeout 10m \
+          -f ./deploy.yaml \
+          --set defaultImage=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
