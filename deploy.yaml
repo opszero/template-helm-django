@@ -1,18 +1,18 @@
 defaultImage: nginx:latest
 
 apps:
-  - name: tiphyspy-voila
+  - name: voila
     service:
       enabled: true
       type: ClusterIP
       ports:
         - name: http
-          port: 8066
+          port: 8866
           protocol: TCP
       autoscaling:
         enabled: true
-        minReplicas: 2
-        maxReplicas: 2
+        minReplicas: 1
+        maxReplicas: 1
         targetCPUUtilizationPercentage: 99
         targetMemoryUtilizationPercentage: 99
       ingress:
