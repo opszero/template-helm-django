@@ -1,18 +1,48 @@
 defaultImage: nginx:latest
 
-redis:
-  enabled: false # Enable
-  master:
-    persistence:
-      enabled: false
-  replica:
-    persistence:
-      enabled: false
-
-
 apps:
-  - name: tiphyspy
+  - name: tiphyspy-voila
     service:
-      enabled: false
-      command: ["python", "main.py", "&"]
-
+      enabled: true
+      type: ClusterIP
+      ports:
+        - name: http
+          port: 8066
+          protocol: TCP
+      autoscaling:
+        enabled: true
+        minReplicas: 2
+        maxReplicas: 2
+        targetCPUUtilizationPercentage: 99
+        targetMemoryUtilizationPercentage: 99
+      ingress:
+        hosts:
+          - host: tiphyspy.opszero.com
+            paths: ["/"]
+            port: 8866
+      healthChecks:
+        lifecycle:
+          preStop:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - sleep 10
+        livenessProbe:
+          failureThreshold: 15
+          initialDelaySeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 30
+          httpGet:
+            path: /
+            port: 8866
+        readinessProbe:
+          failureThreshold: 15
+          initialDelaySeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 30
+          httpGet:
+            path: /
+            port: 8866

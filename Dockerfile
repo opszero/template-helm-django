@@ -1,9 +1,10 @@
-FROM python:3.11
+FROM jupyter/scipy-notebook
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-RUN pip install poetry
-COPY poetry.lock /app/
-COPY pyproject.toml /app/
-RUN poetry export --without-hashes -f requirements.txt --output requirements.txt
-RUN pip install -r requirements.txt
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+ADD . .
+
+CMD ["voila", "--no-browser", "--enable_nbextensions=True", "--Voila.ip=0.0.0.0"]

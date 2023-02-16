@@ -47,4 +47,4 @@ jobs:
         aws eks update-kubeconfig --name $CLUSTER_NAME
         helm repo add tiphys https://opszero.github.io/tiphys
         helm repo update
-        helm upgrade --install tiphyspy tiphys/tiphys --timeout 10m -f ./deploy.yaml \
+        helm upgrade --install tiphyspy tiphys/tiphys --timeout 10m -f ./deploy.yam
