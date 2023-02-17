@@ -1,6 +1,6 @@
 # tiphyspy
 
-Template App to deploy both a Flask app and a Jupyter Voila App
+Template App to deploy both a Flask app and a Jupyter Voila WebApp to Kubernetes
 
 - Deploy a Flask Application
 - Jupyter Voila WebApp
