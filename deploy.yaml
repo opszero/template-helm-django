@@ -5,7 +5,7 @@ apps:
     service:
       enabled: true
       type: ClusterIP
-      command: ["voila", "--no-browser", "--enable_nbextensions=True", "--Voila.ip=0.0.0.0"]
+      command: ["voila", "--no-browser", "--enable_nbextensions=True", "--Voila.ip=0.0.0.0", "report.ipynb"]
       ports:
         - name: http
           port: 8866
