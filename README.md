@@ -4,6 +4,7 @@ Template App to deploy both a Flask app and a Jupyter Voila App
 
 - Deploy a Flask Application
 - Jupyter Voila WebApp
+- [Example](https://tiphyspy.opszero.com/)
 
 ## Jupiter Voila
 
@@ -28,6 +29,14 @@ voila
 docker buildx build --platform linux/amd64 -t opszero-voila-example .
 docker run -p 8866:8866 -it opszero-voila-example
 ```
+
+## Production
+
+Deployed onto Kubernetes using an Ingress.
+
+- [Check Github Actions for Deployment](https://github.com/opszero/tiphyspy/blob/main/.github/workflows/k8s.yml)
+- [Tiphys for Deployment](https://github.com/opszero/tiphys)
+  - [deploy.yaml](https://github.com/opszero/tiphyspy/blob/main/deploy.yaml)
 
 # Pro Support
 
