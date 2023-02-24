@@ -13,7 +13,7 @@ apps:
       autoscaling:
         enabled: true
         minReplicas: 1
-        maxReplicas: 5
+        maxReplicas: 1
         targetCPUUtilizationPercentage: 99
         targetMemoryUtilizationPercentage: 99
       resources:
@@ -26,5 +26,8 @@ apps:
       ingress:
         hosts:
           - host: tiphyspy.opszero.com
+            paths: ["/"]
+            port: 8866
+          - host: fn.opszero.com
             paths: ["/"]
             port: 8866
