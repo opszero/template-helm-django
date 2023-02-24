@@ -1,4 +1,9 @@
-Flask
+pytest
+fastapi
+mangum
+requests
+pynamodb
+Jinja2
 opszero-rustypy
 voila
 ipydatagrid
