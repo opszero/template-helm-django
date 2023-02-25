@@ -1,9 +1,18 @@
 pytest
 fastapi
-mangum
 requests
-pynamodb
 Jinja2
+SQLAlchemy
+
+# Deployment
+uvicorn[standard]
+
+# Lambda
+mangum
+
+# Optional
 opszero-rustypy
+
+# Jupyter
 voila
 ipydatagrid

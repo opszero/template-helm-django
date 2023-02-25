@@ -7,6 +7,7 @@ provider:
   deploymentBucket:
     name: infra.opszero.com
   environment:
+    IN_LAMBDA: true
     DYNAMODB_TABLE_NAME: ${self:service}-${sls:stage}
   iamRoleStatements:
   #   - Effect: "Allow"

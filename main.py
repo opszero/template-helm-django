@@ -1,6 +1,4 @@
-import opszero_rustypy
-
-from mangum import Mangum
+import os
 
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
@@ -22,6 +20,7 @@ def dog(id):
 
 @app.get("/rust")
 def rust():
+    import opszero_rustypy
     return opszero_rustypy.sum_as_string(1, 2)
 
 
@@ -35,4 +34,7 @@ def health():
     return {"status": "Success"}
 
 
-handler = Mangum(app)
+if __name__ == "__main__":
+    if os.environ.get("IN_LAMBDA") == "true":
+        from mangum import Mangum
+        handler = Mangum(app)
