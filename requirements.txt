@@ -1,0 +1,18 @@
+pytest
+fastapi
+requests
+Jinja2
+SQLAlchemy
+
+# Deployment
+uvicorn[standard]
+
+# Lambda
+mangum
+
+# Optional
+opszero-rustypy
+
+# Jupyter
+voila
+ipydatagrid
