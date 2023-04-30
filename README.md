@@ -1,9 +1,6 @@
-# Jupyter Voila WebApps on Kubernetes
+# Django on Kubernetes
 
-Build Jupyter Notebooks and deploy them as WebApps using Voila on Kubernetes.
-
-- Jupyter Voila WebApp
-- [Example](https://tiphyspy.opszero.com/)
+Build and deploy Django onto Kubernetes
 
 # Usage
 
