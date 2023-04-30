@@ -1,0 +1,92 @@
+secrets:
+  DJANGO_SETTINGS_MODULE: "mrwork.settings"
+  DJANGO_ADMIN_URL: "admin"
+
+redis:
+  enabled: true
+  master:
+    persistence:
+      enabled: false
+  replica:
+    replicaCount: 1
+    persistence:
+      enabled: false
+
+apps:
+  - name: opszero
+    service:
+      enabled: true
+      type: ClusterIP
+      ports:
+        - name: http
+          port: 8000
+          protocol: TCP
+      autoscaling:
+        enabled: true
+        minReplicas: 2
+        maxReplicas: 2
+        targetCPUUtilizationPercentage: 99
+        targetMemoryUtilizationPercentage: 99
+      ingress:
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-read-timeout: 600s
+          nginx.ingress.kubernetes.io/proxy-send-timeout: 600s
+          nginx.ingress.kubernetes.io/proxy-body-size: 200m
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "70"
+        hosts:
+          - host: api.example.com
+            paths: ["/"]
+            port: 8000
+      healthChecks:
+        lifecycle:
+          preStop:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - sleep 10
+        livenessProbe:
+          failureThreshold: 15
+          initialDelaySeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 30
+          httpGet:
+            path: /
+            port: 8000
+        readinessProbe:
+          failureThreshold: 15
+          initialDelaySeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 30
+          httpGet:
+            path: /
+            port: 8000
+    jobs:
+      - name: db-migrate
+        command: ["python", "manage.py", "migrate"]
+        annotations:
+          "helm.sh/hook": pre-install,pre-upgrade
+          "helm.sh/hook-delete-policy": before-hook-creation
+  - name: celery
+    service:
+      enabled: true
+      command: "celery --app=opszero.celery worker --loglevel=info --concurrency=4"
+      autoscaling:
+        enabled: false
+  - name: celery-flower
+    service:
+      enabled: true
+      command: "celery -A opszero.celery flower --address=0.0.0.0 --port=5555"
+      type: ClusterIP
+      ports:
+        - name: http
+          port: 5555
+          protocol: TCP
+      autoscaling:
+        enabled: false
+      hosts:
+        - host: flower.example.com
+          paths: ["/"]
+          port: 5555
