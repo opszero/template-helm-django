@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Setup Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
       - name: Install requirements.txt
         run: |
           pip3 install -r ./requirements.txt
